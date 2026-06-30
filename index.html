@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RDBX Official Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
 
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #021a0a!important;
+    }
+.ewa-bg {
+      position: fixed;
+      inset: 0;
+      background-color: #021a0a;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34,197,94,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(16,100,40,0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(5,40,15,0.4) 0%, transparent 60%);
+      z-index: 0;
+      pointer-events: none;
+    }
+.ewa-page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+.ewa-wrap,.ewa-wrap *,.ewa-wrap *::before,.ewa-wrap *::after {
+      box-sizing: border-box;
+    }
+.ewa-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.2rem;
+      padding: 2.5rem 1.2rem;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+.ewa-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid rgba(34,197,94,.4);
+      border-radius: 999px;
+      padding:.35em 1.2em;
+      font-size:.7rem;
+      font-weight: 700;
+      letter-spacing:.2em;
+      text-transform: uppercase;
+      color: #4ade80;
+      background: rgba(34,197,94,.08);
+    }
+.ewa-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 6px #22c55e;
+      animation: ewaBlink 1.4s ease-in-out infinite;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    @keyframes ewaBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity:.1; }
+    }
+.ewa-h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 10vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing:.02em;
+      background: linear-gradient(120deg, #ffd84d 0%, #f5a623 40%, #ffffff 75%, #ffd84d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+.ewa-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+.ewa-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(34,197,94,.4), transparent);
+    }
+.ewa-diamond {
+      width: 8px;
+      height: 8px;
+      background: rgba(255,215,0,.6);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+.ewa-body {
+      font-size:.95rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.75);
+      font-weight: 400;
+      max-width: 340px;
+      margin: 0;
+    }
+.ewa-sub {
+      font-size:.82rem;
+      letter-spacing:.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      line-height: 2;
+      font-weight: 600;
+      margin: 0;
+    }
+.ewa-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      width: 100%;
+      max-width: 300px;
+    }
+.ewa-btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap:.6em;
+      padding:.9em 2.8em;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing:.1em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      border: none;
+      transition: transform.15s, box-shadow.15s;
+      cursor: pointer;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+.ewa-btn-main:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+.ewa-btn-main:active {
+      transform: scale(.97);
+    }
+.ewa-btn-main svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Telegram Button - Blue + Pulse Animation */
+.ewa-btn-telegram {
+      background: linear-gradient(100deg, #0088cc 0%, #229ED9 50%, #0088cc 100%);
+      box-shadow: 0 0 32px rgba(34,158,217,.5), 0 3px 0 rgba(0,0,0,.3);
+      animation: pulseGlow 2s infinite;
+    }
+.ewa-btn-telegram:hover {
+      box-shadow: 0 0 46px rgba(34,158,217,.8), 0 5px 0 rgba(0,0,0,.2);
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 32px rgba(34,158,217,.5), 0 3px 0 rgba(0,0,0,.3); }
+      50% { box-shadow: 0 0 50px rgba(34,158,217,.9), 0 3px 0 rgba(0,0,0,.3); }
+    }
+
+    /* WhatsApp Button - Green + Bounce Animation */
+.ewa-btn-whatsapp {
+      background: linear-gradient(100deg, #25D366 0%, #128C7E 50%, #25D366 100%);
+      box-shadow: 0 0 32px rgba(37,211,102,.5), 0 3px 0 rgba(0,0,0,.3);
+      animation: bounceIn 3s infinite;
+    }
+.ewa-btn-whatsapp:hover {
+      box-shadow: 0 0 46px rgba(37,211,102,.8), 0 5px 0 rgba(0,0,0,.2);
+    }
+    @keyframes bounceIn {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+      60% { transform: translateY(-3px); }
+    }
+
+.ewa-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+.ewa-stat {
+      padding:.85rem.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+.ewa-stat +.ewa-stat {
+      border-left: 1px solid rgba(255,255,255,.1);
+    }
+.ewa-stat-n {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffd700;
+      line-height: 1;
+      display: block;
+    }
+.ewa-stat-l {
+      font-size:.58rem;
+      letter-spacing:.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      font-weight: 600;
+      display: block;
+    }
+.ewa-footer {
+      font-size:.62rem;
+      letter-spacing:.1em;
+      color: rgba(255,255,255,.22);
+      margin: 0;
+    }
+  </style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1206322084925892');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1206322084925892&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+</head>
+<body>
+
+  <div class="ewa-bg"></div>
+  <div class="ewa-page">
+    <div class="ewa-wrap">
+
+      <div class="ewa-badge">
+        <span class="ewa-dot"></span>
+        Active Community
+      </div>
+
+      <h1 class="ewa-h1">RDBX<br>Official</h1>
+
+      <div class="ewa-divider">
+        <div class="ewa-line"></div>
+        <div class="ewa-diamond"></div>
+        <div class="ewa-line"></div>
+      </div>
+
+      <p class="ewa-body">
+        Join our official community for daily updates, tech discussions, and app reviews. Connect with 30K+ members for free.
+      </p>
+
+      <p class="ewa-sub">Daily Updates<br>Join Now For Free</p>
+
+      <div class="ewa-btn-group">
+        <!-- Telegram Button - Blue + Official Telegram Logo -->
+        <a class="ewa-btn-main ewa-btn-telegram"
+           href="https://t.me/+c9KN2mm04KcyNjY1"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="fbq('track', 'subscribe', {content_name: 'Telegram Channel Join', content_category: 'RDBX Community'});">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+          </svg>
+          Join Telegram
+        </a>
+
+        <!-- WhatsApp Button - Green + Official WhatsApp Logo -->
+        <a class="ewa-btn-main ewa-btn-whatsapp"
+           href="https://whatsapp.com/channel/0029VbCzJp28fewpsvvA4b1H"
+           target="_blank"
+           rel="noopener noreferrer"
+           onclick="fbq('track', 'Lead', {content_name: 'WhatsApp Channel Join', content_category: 'RDBX Community'});">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0.16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Join Whatsapp
+        </a>
+      </div>
+
+      <div class="ewa-stats">
+        <div class="ewa-stat">
+          <span class="ewa-stat-n">30K+</span>
+          <span class="ewa-stat-l">Members</span>
+        </div>
+        <div class="ewa-stat">
+          <span class="ewa-stat-n">Daily</span>
+          <span class="ewa-stat-l">Updates</span>
+        </div>
+        <div class="ewa-stat">
+          <span class="ewa-stat-n">100%</span>
+          <span class="ewa-stat-l">Free</span>
+        </div>
+      </div>
+
+      <p class="ewa-footer">© 2026 RDBX Official. Community for users 18+ only.</p>
+
+    </div>
+  </div>
+
+</body>
+</html>
